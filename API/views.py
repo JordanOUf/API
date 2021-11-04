@@ -93,7 +93,7 @@ def userDetail(request, pk):
         users = User.objects.get(fb_id=pk)
         print(type(users))
     except User.DoesNotExist:
-        return Response("User does not exist")
+        return None
     serializer = UserSerializer(users, many=False)
     print(serializer.data.__str__())
     return Response(serializer.data)
