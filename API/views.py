@@ -87,11 +87,13 @@ def userList(request):
 
 @api_view(['GET'])
 def userDetail(request, pk):
+    print(request.__str__())
     try:
+        print(User.objects.__str__())
         users = User.objects.get(fb_id=pk)
         print(type(users))
     except User.DoesNotExist:
-        return Response("User does not exist")
+        return Response(None)
     serializer = UserSerializer(users, many=False)
     print(serializer.data.__str__())
     return Response(serializer.data)
@@ -102,7 +104,7 @@ def userCreate(request):
 
     try:
         users = User.objects.get(fb_id=data['fb_id'])
-        return Response("User already exist")
+        return Response(None)
     except User.DoesNotExist:
         serializer = UserSerializer(data=data)
         if serializer.is_valid():
@@ -116,7 +118,7 @@ def userUpdate(request, pk):
     try:
         users = User.objects.get(fb_id=pk)
     except User.DoesNotExist:
-        return Response("User does not exist")
+        return Response(None)
     serializer = UserSerializer(instance=users, data=request.data)
 
     if serializer.is_valid():
@@ -130,7 +132,7 @@ def userDelete(request, pk):
     try:
         user = User.objects.get(fb_id=pk)
     except User.DoesNotExist:
-        return Response("User does not exist")
+        return Response(None)
     user.delete()
 
-    return Response('Item succsesfully delete!')
+    return Response('Item successfully delete!')
