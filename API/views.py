@@ -89,9 +89,11 @@ def userList(request):
 def userDetail(request, pk):
     try:
         users = User.objects.get(fb_id=pk)
+        print(type(users))
     except User.DoesNotExist:
         return Response("User does not exist")
     serializer = UserSerializer(users, many=False)
+    print(serializer.data.__str__())
     return Response(serializer.data)
 
 @api_view(['POST'])
