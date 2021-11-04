@@ -135,4 +135,4 @@ def userDelete(request, pk):
         return Response(None)
     user.delete()
 
-    return Response('Item successfully delete!')
+    return Response('Item successfully delete')
