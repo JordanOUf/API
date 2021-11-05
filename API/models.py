@@ -12,7 +12,7 @@ class Task(models.Model):
 
 
 class User(models.Model):
-    fb_id = models.PositiveBigIntegerField(unique=True, blank=False, primary_key=True)
+    fb_id = models.CharField(unique=True, blank=False, primary_key=True, max_length=30)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     score_value = models.PositiveIntegerField(blank=False, default=0)
